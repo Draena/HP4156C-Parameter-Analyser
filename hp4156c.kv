@@ -1,0 +1,336 @@
+#:kivy 1.9.1
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+<Configuration>:
+	id: tp
+	do_default_tab: False
+	
+	smu1_select: smu1_select
+	smu1_text1: SMU1_text1
+	smu1_text2: SMU1_text2
+	smu1_text3: SMU1_text3
+	smu1_text4: SMU1_text4
+	smu1_text5: SMU1_text5
+	smu1_text6: SMU1_text6
+	TabbedPanelItem:
+		id: sweep
+		text: "Sweep"
+		GridLayout:
+			col_default_width: '90dp'
+			row_default_width: '100dp'
+			rows: 4
+			cols: 8
+			padding: 10
+			spacing: 10
+			id: SweepBox
+			Label: 
+				text: 'SMU1'
+				halign: 'center'
+				valign: 'middle'
+				shorten: True
+				text_size: self.size
+				height: '32dp'
+				width: '80dp'
+			BoxLayout:
+				Button:
+					id: smu1_select
+					text: "   -   "
+					on_release: smu1_dropdown.open(self)
+					size_hint_y: None
+					height: '32dp'
+				Widget: 
+					on_parent: smu1_dropdown.dismiss()
+				DropDown:
+					id: smu1_dropdown
+					on_select: root.smu1_text_update(args[1])
+					Button:
+						text: 'Constant'
+						size_hint_y: None
+						height: '32dp'
+						on_release: smu1_dropdown.select('Constant')
+					Button:
+						text: 'Variable'
+						size_hint_y: None
+						height: '32dp'
+						on_release: smu1_dropdown.select('Variable')
+					Button:
+						text: 'Common'
+						size_hint_y: None
+						height: '32dp'
+						on_release: smu1_dropdown.select('Common')
+					Button:
+						text: 'Disabled'
+						size_hint_y: None
+						height: '32dp'
+						on_release: smu1_dropdown.select('Disabled')
+			TextInput:
+				id: SMU1_text1
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Start'
+			TextInput:
+				id: SMU1_text2
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Step'
+			TextInput:
+				id: SMU1_text3
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Stop'
+			TextInput:
+				id: SMU1_text4
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Const'
+			TextInput:
+				id: SMU1_text5
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+			TextInput:
+				id: SMU1_text6
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+			Label: 
+				text: 'SMU2'
+			BoxLayout:
+				Button:
+					id: smu2_select
+					text: "-"
+					on_release: smu2_dropdown.open(self)
+					size_hint_y: None
+					height: '48dp'
+				Widget:
+					on_parent: smu2_dropdown.dismiss()
+				
+				DropDown:
+					id: smu2_dropdown
+					on_select: smu2_select.text = 'Selected value: {}' .format(args[1])
+					
+					Button:
+						text: 'Constant'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu2_dropdown.select('Con')
+					Button:
+						text: 'Variable'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu2_dropdown.select('Var')
+					Button:
+						text: 'Common'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu2_dropdown.select('Com')
+					Button:
+						text: 'Disabled'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu2_dropdown.select('Dis')
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Start'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Step'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Stop'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Const'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+			Label: 
+				text: 'SMU3'
+			BoxLayout:
+				Button:
+					id: smu3_select
+					text: "-"
+					on_release: smu3_dropdown.open(self)
+					size_hint_y: None
+					height: '48dp'
+				Widget:
+					on_parent: smu3_dropdown.dismiss()
+				
+				DropDown:
+					id: smu3_dropdown
+					on_select: smu3_select.text = 'Selected value: {}' .format(args[1])
+					
+					Button:
+						text: 'Constant'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu3_dropdown.select('Con')
+					Button:
+						text: 'Variable'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu3_dropdown.select('Var')
+					Button:
+						text: 'Common'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu3_dropdown.select('Com')
+					Button:
+						text: 'Disabled'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu3_dropdown.select('Dis')
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Start'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Step'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Stop'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Const'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+			Label: 
+				text: 'SMU4'
+			BoxLayout:
+				Button:
+					id: smu4_select
+					text: "-"
+					on_release: smu4_dropdown.open(self)
+					size_hint_y: None
+					height: '48dp'
+				Widget:
+					on_parent: smu4_dropdown.dismiss()
+				
+				DropDown:
+					id: smu4_dropdown
+					on_select: smu4_select.text = 'Selected value: {}' .format(args[1])
+					
+					Button:
+						text: 'Constant'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu4_dropdown.select('Con')
+					Button:
+						text: 'Variable'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu4_dropdown.select('Var')
+					Button:
+						text: 'Common'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu4_dropdown.select('Com')
+					Button:
+						text: 'Disabled'
+						size_hint_y: None
+						height: '48dp'
+						on_release: smu4_dropdown.select('Dis')
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Start'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Step'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Stop'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Const'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+			TextInput:
+				size_hint_y: None
+				height: '32dp'
+				multiline: False
+				text: 'Compliance'
+	TabbedPanelItem:
+		id: sample
+		text: "Sample"
+		BoxLayout:
+			id: SampleBox
+	TabbedPanelItem:
+		id: qscv
+		text: "QSCV"
+		BoxLayout:
+			id: QSCVBox
+
+<Results>:
+	graph: graphcanvas
+	BoxLayout:
+		canvas.before:
+			Color:
+				rgba: 0,0,0,1
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Graph:
+			id: graphcanvas
+			xlabel: 'X'
+			ylabel: 'Y'
+			x_ticks_minor: 5
+			x_ticks_major: 25
+			y_ticks_major: 1
+			y_grid_label: True
+			x_grid_label: True
+			padding: 5
+			x_log: False
+			y_log: False
+			x_grid:  True
+			y_grid: True
+			xmin: -0
+			xmax: 100
+			ymin: -1
+			ymax: 1
