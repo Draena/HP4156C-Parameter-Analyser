@@ -74,17 +74,19 @@ class hp4156c(object):
                 self.string = ":PAGE:MEAS:" + arg1 + ":"
                 if arg1 == "VAR1":
 			self.pa.write(self.string + "SPAC %s" % self.arg2[0])
-			self.pa.write(self.string + "STAR %s" % self.arg2[1])
-			self.pa.write(self.string + "STEP %s" % self.arg2[2])
-			self.pa.write(self.string + "STOP %s" % self.arg2[3])
-			self.pa.write(self.string + "COMP %s" % self.arg2[4])
+			self.pa.write(self.string + "MODE %s" % self.arg2[1])
+			self.pa.write(self.string + "STAR %s" % self.arg2[2])
+			self.pa.write(self.string + "STEP %s" % self.arg2[3])
+			self.pa.write(self.string + "STOP %s" % self.arg2[4])
+			self.pa.write(self.string + "COMP %s" % self.arg2[5])
 			
 		elif arg1 == "VAR2":
 			self.pa.write(self.string + "SPAC %s" % self.arg2[0])
-			self.pa.write(self.string + "STAR %s" % self.arg2[1])
-			self.pa.write(self.string + "POIN %s" % self.arg2[3])
-			self.pa.write(self.string + "STEP %s" % self.arg2[2])
-			self.pa.write(self.string + "COMP %s" % self.arg2[4])
+			self.pa.write(self.string + "MODE %s" % self.arg2[1])
+			self.pa.write(self.string + "STAR %s" % self.arg2[2])
+			self.pa.write(self.string + "POIN %s" % self.arg2[4])
+			self.pa.write(self.string + "STEP %s" % self.arg2[3])
+			self.pa.write(self.string + "COMP %s" % self.arg2[5])
         def _daqStringMod(self,arg):
                 self.stuff = []
                 for i in arg:

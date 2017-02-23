@@ -34,6 +34,7 @@ class Configuration(TabbedPanel):
 	smu1_select = ObjectProperty(None)
 	# If one of smu1 to smu 4 has variable 1 selected, then remove from menu
 	# If one of smu1 to smu 4 has variable 1 selected, then add variable 2 to menu
+	# http://stackoverflow.com/questions/38234848/kivy-dynamically-add-and-remove-dropdown-entries
 	# For sweep mode need at least one variable before can continue.
 	def smu1_text_update(self, text):
 		self.smu1_select.text = '%s' % text 
@@ -57,6 +58,7 @@ class Configuration(TabbedPanel):
 			self.smu1_text6.disabled = True
 			# Import visa command smu()
 		if text == "Variable":
+			# Two variable commands, different input variations.
 			self.smu1_text1.disabled = True
 			self.smu1_text1.text = "Vname"
 			self.smu1_text2.disabled = True
@@ -81,8 +83,14 @@ class Configuration(TabbedPanel):
 	# This window also could have a write to excel with a directory box, and check or uncheck
 	# If the graphical functionality is required. I.E all measurements could be conducted
 	# without transitioning to the results accordion if required.
+	def addButtonPressed(self):
+		# If none of the variable buttons are selected then add them to the menu
+		#
+	def removeButtonPressed(self):
+		# If e
+		self.dropdown.remove_widget(self)
+		self.dropdown.clear_widgets()
 
-	
 #class ConfigurationHeader(tabbedpanel):
 	
 # There also would be room in here for an accordion tab that allows automation of multiple

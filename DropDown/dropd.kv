@@ -1,0 +1,45 @@
+<HomeScreen>:
+    id: home_screen
+    addButton: addButtonID
+    removeButton: removeButtonID
+    top_layout: topLayoutID
+
+    orientation: 'vertical'
+    FloatLayout: 
+        size_hint: 1, 1
+        Button:
+            id: addButtonID
+            text: 'Add'
+            pos_hint: {'x': .35, 'y': .70}
+            size_hint: .3, .08
+            valign: 'middle'
+            halign: 'center'
+            text_size: self.size
+            on_release: root.addButtonPressed()
+        Button:
+            id: removeButtonID
+            text: 'Remove'
+            pos_hint: {'x': .35, 'y': .60}
+            size_hint: .3, .08
+            valign: 'middle'
+            halign: 'center'
+            text_size: self.size
+            on_release: root.removeButtonPressed()
+
+
+    BoxLayout:
+        id: topLayoutID
+        size_hint: 1, .05
+        pos_hint: {'x': 0, 'y': .90}
+        Button:
+            id: btn_release
+            text: 'Release'
+            on_press: root.btn_releaseClicked()
+        Button:
+            id: btn_version
+            text: 'Version'
+            on_press: root.btn_versionClicked()
+        Button:
+            id: btn_device
+            text: 'Device'
+            on_press: root.btn_deviceClicked()
