@@ -68,7 +68,8 @@ class hp4156c(object):
         def _varStringMod(self, arg):
                 arg[0] = "'" + arg[0] + "'"
                 return arg
-
+		## arg1 is the smu number
+		## arg2 is the parameters for a sweep. [LIN:LOG SING:DOUB STAR STEP STOP COMP]
         def var(self, arg1, arg2):
                 self.arg2 = self._varStringMod(arg2)
                 self.string = ":PAGE:MEAS:" + arg1 + ":"
