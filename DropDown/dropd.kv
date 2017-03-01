@@ -1,31 +1,8 @@
 <HomeScreen>:
     id: home_screen
-    addButton: addButtonID
-    removeButton: removeButtonID
     top_layout: topLayoutID
 
     orientation: 'vertical'
-    FloatLayout: 
-        size_hint: 1, 1
-        Button:
-            id: addButtonID
-            text: 'Add'
-            pos_hint: {'x': .35, 'y': .70}
-            size_hint: .3, .08
-            valign: 'middle'
-            halign: 'center'
-            text_size: self.size
-            on_release: root.addButtonPressed()
-        Button:
-            id: removeButtonID
-            text: 'Remove'
-            pos_hint: {'x': .35, 'y': .60}
-            size_hint: .3, .08
-            valign: 'middle'
-            halign: 'center'
-            text_size: self.size
-            on_release: root.removeButtonPressed()
-
 
     BoxLayout:
         id: topLayoutID
@@ -33,13 +10,13 @@
         pos_hint: {'x': 0, 'y': .90}
         Button:
             id: btn_release
-            text: 'Release'
+            text: 'SMU1'
             on_press: root.btn_releaseClicked()
         Button:
             id: btn_version
-            text: 'Version'
+            text: 'SMU2'
             on_press: root.btn_versionClicked()
         Button:
             id: btn_device
-            text: 'Device'
+            text: 'SMU3'
             on_press: root.btn_deviceClicked()
