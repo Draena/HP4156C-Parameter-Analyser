@@ -58,7 +58,7 @@ class hp4156c(object):
 		return arg
 
 	def smu(self, arg1, arg2):
-		"""Sets up the SMU specified in arg1 with the parameters specified in 
+		"""Sets up the SMU specified in arg1 with the parameters specified in
 		arg2 """
 		self.arg2 = self._stringSmuMod(arg2)
 		self.smuSetup = [":PAGE:CHAN:"+arg1+":VNAME %s",":PAGE:CHAN:"+arg1+":FUNC %s",":PAGE:CHAN:"+arg1+":INAME %s",":PAGE:CHAN:"+arg1+":MODE %s",":PAGE:MEAS:CONS:"+arg1+" %s",":PAGE:MEAS:CONS:"+arg1+":COMP %s"]
@@ -77,7 +77,7 @@ class hp4156c(object):
 			self.pa.write(":PAGE:CHAN:" + i + ":DIS")
 
 	def _varStringMod(self, arg):
-		"""format conversion for variable arguments to parameter analyser 
+		"""format conversion for variable arguments to parameter analyser
 		ascii"""
 		arg[0] = "'" + arg[0] + "'"
 		return arg
@@ -115,35 +115,31 @@ class hp4156c(object):
 		the case when the stored data length exceeds the maximum data length of
 		a retrieve command"""
 		#self.data = self._daqStringMod(arg)
-		self.data = []
+		self.data = [[],[]]
 		for x in range(0,len(values)):
 			try:
 				print("Obtaining %s data values" % values[x])
 				self.pa.write(":DATA? %s"%values[x])
 			except:
 				print("Command Timeout!")
-			_tempData = self.pa.read_values()
-			print("Obtained %d data values!"%len(_tempData))
-			_tempData.insert(0,"%s"%values[x])
-			if(self.data == []):
-				for i in xrange(len(_tempData)):
-					self.data.append
-			self.data.append(_tempData)
-		self.data = zip(*(self.data))
+			self.data[x] = self.pa.read_values()
+			print("Obtained %d data values for %s" %len(self.data[x]),values[x])
+		self.data=np.transpose(np.array(self.data))
+
 
 	def single(self):
 		"""Initiate a single measurement using entered parameters"""
 		self.pa.write(":PAGE:SCON:SING")
 		self.pa.write("*WAI")
 
-		
+
 	def continuous(self):
 		"""Initiate continuous measurements using entered parameters"""
 		self.pa.write(":PAGE:SCON:CONT")
 		self.pa.write("*WAI")
 
 	def visualiseTwoYs(self, x, y1, y2):
-		"""Displays results on the parameter analysers display. This is 
+		"""Displays results on the parameter analysers display. This is
 		superfluous to requirements as the gui handles this"""
 		self.x = self._varStringMod(x)
 		self.y1 = self._varStringMod(y1)
@@ -163,7 +159,7 @@ class hp4156c(object):
 		self.pa.write(":PAGE:DISP:GRAP:Y2:MAX %s" % self.y2[3])
 
 	def visualise(self, x ,y1):
-		"""Displays results on the parameter analysers display. This is 
+		"""Displays results on the parameter analysers display. This is
 		superfluous to requirements as gui will handle this"""
 		self.x = self._varStringMod(x)
 		self.y1 = self._varStringMod(y1)
@@ -178,7 +174,7 @@ class hp4156c(object):
 		self.pa.write(":PAGE:DISP:GRAP:Y1:MAX %s" % self.y1[3])
 
 	def abort(self):
-		"""Does not do anything currently. This function could be useful if we 
+		"""Does not do anything currently. This function could be useful if we
 		implement continuous reading mode"""
 		self.pa.write(":PAGE:SCON:STOP")
 		pass
