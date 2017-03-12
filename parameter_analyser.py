@@ -40,7 +40,7 @@ device = hp4156c()
 print(device.error())
 device.reset()
 print(device.error())
-## Setup the device for a Diode Measurement 
+## Setup the device for a Diode Measurement
 device.measurementMode("SWEEP","SHORT")
 print(device.error())
 device.smu("SMU1",["VF","VAR1","IF","V"])
