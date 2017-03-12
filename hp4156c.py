@@ -127,7 +127,7 @@ class hp4156c(object):
 			except:
 				print("Command Timeout!")
 			self.data[x] = self.pa.read_values()
-			print("Obtained %d data values for %s" %len(self.data[x]),values[x])
+			print("Obtained %d data values for %s" % (len(self.data[x]),values[x]))
 		self.data=np.transpose(np.array(self.data))
 
 	def save_data(self,fname="test.csv"):
