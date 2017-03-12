@@ -10,6 +10,7 @@
 # When wrapped the HP4156C class takes care of all the visa syntax
 # and translates parameter analyser settings into visa commands
 import sys,io,visa
+import numpy as np
 
 
 class hp4156c(object):
@@ -22,7 +23,7 @@ class hp4156c(object):
 		"""Iterates through all devices on the GPIB bus until it finds the
 		parameter analyser with ID _self.deviceName. If no parameter analyser found
 		the initiation is aborted and a sys.exit is called"""
-		print("HP4156C Initialisation")	
+		print("HP4156C Initialisation")
 		_devices = visa.get_instruments_list()
 		for _x in range(0,len(_devices)):
 			try:
@@ -117,21 +118,23 @@ class hp4156c(object):
 		the case when the stored data length exceeds the maximum data length of
 		a retrieve command"""
 		#self.data = self._daqStringMod(arg)
-		self.data = []
+		self.values=values
+		self.data = [[],[]]
 		for x in range(0,len(values)):
 			try:
 				print("Obtaining %s data values" % values[x])
 				self.pa.write(":DATA? %s"%values[x])
 			except:
 				print("Command Timeout!")
-			_tempData = self.pa.read_values()
-			print("Obtained %d data values!"%len(_tempData))
-			_tempData.insert(0,"%s"%values[x])
-			if(self.data == []):
-				for i in xrange(len(_tempData)):
-					self.data.append
-			self.data.append(_tempData)
-		self.data = zip(*(self.data))
+			self.data[x] = self.pa.read_values()
+			print("Obtained %d data values for %s" %len(self.data[x]),values[x])
+		self.data=np.transpose(np.array(self.data))
+
+	def save_data(self,fname="test.csv"):
+		header=""
+		for val in self.values:
+			header=header+val+","
+		np.savetxt(fname, self.data,delimiter=',',header=header)
 
 	def single(self):
 		"""Initiate a single measurement using entered parameters"""
