@@ -10,6 +10,7 @@
 # When wrapped the HP4156C class takes care of all the visa syntax
 # and translates parameter analyser settings into visa commands
 import sys,io,visa
+import numpy as np
 deviceName = "HEWLETT-PACKARD,4156C,0,03.04:04.05:01.00"
 _id = ""
 class hp4156c(object):
@@ -115,6 +116,7 @@ class hp4156c(object):
 		the case when the stored data length exceeds the maximum data length of
 		a retrieve command"""
 		#self.data = self._daqStringMod(arg)
+		self.values=values
 		self.data = [[],[]]
 		for x in range(0,len(values)):
 			try:
@@ -126,6 +128,11 @@ class hp4156c(object):
 			print("Obtained %d data values for %s" %len(self.data[x]),values[x])
 		self.data=np.transpose(np.array(self.data))
 
+	def save_data(self,fname="test.csv"):
+		header=""
+		for val in self.values:
+			header=header+val+","
+		np.savetxt(fname, self.data,delimiter=',',header=header)
 
 	def single(self):
 		"""Initiate a single measurement using entered parameters"""
