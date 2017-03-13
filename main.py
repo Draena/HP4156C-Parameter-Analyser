@@ -9,7 +9,7 @@ from kivy.uix.accordion import Accordion, AccordionItem
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
-from kivy.garden.graph import Graph, MeshLinePlot
+
 from kivy.properties import ObjectProperty, StringProperty
 from math import sin
 
@@ -97,21 +97,7 @@ class Configuration(TabbedPanel):
 # test routines to allow the device to constantly measure various parameters over an
 # extended time period. This could be very powerful for device analysis without being
 # stuck on the parameter analyser.
-class Results(BoxLayout):
-	# This results accordion tab needs to graphically display the results of measurements
-	# It passes this information from the result of a parameter analyser test run
-	# Using numpy and scipy it is possible to graphically display the returned values
-	# Saving them to an excel file and also downloading them from the device.
-	graph = ObjectProperty(None)
-	# graph.add_plot()
-	#plot = MeshLinePlot(color=[1,0,0,1])
-	#plot.points = [(x,sin(x/10.)) for x in range(0,101)]
-	#graph.add_plot(plot)
-	def plot_data(self):
-		plot = MeshLinePlot(color=[1,1,0,1])
-		self.plot.points = [(x,sin(x/10.)) for x in range(0,101)]
-		self.graph.add_plot(plot)
-	pass
+
 
 class hp4156cApp(App):
 	def build(self):
@@ -123,23 +109,13 @@ class hp4156cApp(App):
 		root.add_widget(header)
 		## The main Accordion menu
 		menu = Accordion()
-		## The second accordion tab graphs data and saves to excel
-		item = AccordionItem(title='Results')
-		results = BoxLayout(orientation='vertical')
-		# results.add_widget(Label(text="Graphical Results Display"))
-		## Add a title header to the window
-		#graph = Graph(xlabel='X', ylabel='Y', x_ticks_minor=5, x_ticks_major=25, y_ticks_major=1,y_grid_label=True, x_grid_label=True, padding=5, x_grid=True, y_grid=True, xmin=-0, xmax=100, ymin=-1, ymax=1)
-		#plot = MeshLinePlot(color=[1, 0, 0, 1])
-		#plot.points = [(x, sin(x / 10.)) for x in range(0, 101)]
-		#graph.add_plot(plot)
-		#results.add_widget(graph)
-		item.add_widget(Results())
-		#item.add_widget(graph)
-		menu.add_widget(item)
+
 		## The first accordion tab has three buttons
 		item = AccordionItem(title='Configuration')
 		item.add_widget(Configuration())
 		menu.add_widget(item)
+		#the above section can be repeated to add more accordion items
+
 		## Add the accordion to the main screen
 		root.add_widget(menu)
 		return root

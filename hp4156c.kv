@@ -1,9 +1,9 @@
 #:kivy 1.9.1
-#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
 <Configuration>:
 	id: tp
 	do_default_tab: False
-	
+
 	smu1_select: smu1_select
 	smu1_text1: SMU1_text1
 	smu1_text2: SMU1_text2
@@ -22,7 +22,7 @@
 			padding: 10
 			spacing: 10
 			id: SweepBox
-			Label: 
+			Label:
 				text: 'SMU1'
 				halign: 'center'
 				valign: 'middle'
@@ -37,7 +37,7 @@
 					on_release: smu1_dropdown.open(self)
 					size_hint_y: None
 					height: '32dp'
-				Widget: 
+				Widget:
 					on_parent: smu1_dropdown.dismiss()
 				DropDown:
 					id: smu1_dropdown
@@ -98,7 +98,7 @@
 				height: '32dp'
 				multiline: False
 				text: 'Compliance'
-			Label: 
+			Label:
 				text: 'SMU2'
 			BoxLayout:
 				Button:
@@ -109,11 +109,11 @@
 					height: '48dp'
 				Widget:
 					on_parent: smu2_dropdown.dismiss()
-				
+
 				DropDown:
 					id: smu2_dropdown
 					on_select: smu2_select.text = 'Selected value: {}' .format(args[1])
-					
+
 					Button:
 						text: 'Constant'
 						size_hint_y: None
@@ -164,7 +164,7 @@
 				height: '32dp'
 				multiline: False
 				text: 'Compliance'
-			Label: 
+			Label:
 				text: 'SMU3'
 			BoxLayout:
 				Button:
@@ -175,11 +175,11 @@
 					height: '48dp'
 				Widget:
 					on_parent: smu3_dropdown.dismiss()
-				
+
 				DropDown:
 					id: smu3_dropdown
 					on_select: smu3_select.text = 'Selected value: {}' .format(args[1])
-					
+
 					Button:
 						text: 'Constant'
 						size_hint_y: None
@@ -230,7 +230,7 @@
 				height: '32dp'
 				multiline: False
 				text: 'Compliance'
-			Label: 
+			Label:
 				text: 'SMU4'
 			BoxLayout:
 				Button:
@@ -241,11 +241,11 @@
 					height: '48dp'
 				Widget:
 					on_parent: smu4_dropdown.dismiss()
-				
+
 				DropDown:
 					id: smu4_dropdown
 					on_select: smu4_select.text = 'Selected value: {}' .format(args[1])
-					
+
 					Button:
 						text: 'Constant'
 						size_hint_y: None
@@ -306,31 +306,3 @@
 		text: "QSCV"
 		BoxLayout:
 			id: QSCVBox
-
-<Results>:
-	graph: graphcanvas
-	BoxLayout:
-		canvas.before:
-			Color:
-				rgba: 0,0,0,1
-			Rectangle:
-				pos: self.pos
-				size: self.size
-		Graph:
-			id: graphcanvas
-			xlabel: 'X'
-			ylabel: 'Y'
-			x_ticks_minor: 5
-			x_ticks_major: 25
-			y_ticks_major: 1
-			y_grid_label: True
-			x_grid_label: True
-			padding: 5
-			x_log: False
-			y_log: False
-			x_grid:  True
-			y_grid: True
-			xmin: -0
-			xmax: 100
-			ymin: -1
-			ymax: 1
