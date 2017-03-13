@@ -11,7 +11,7 @@ from hp4156c import hp4156c
 ## Code starts here
 ###############################################
 
-def diodesweep(fname="test.csv"):
+def fetsweep(fname="test.csv"):
     # Initialise the device
     device = hp4156c()
     print(device.error())
@@ -72,5 +72,5 @@ def diodesweep():
 
 
 
-if __nam__ == "__main__":
+if __name__ == "__main__":
     diodesweep()
