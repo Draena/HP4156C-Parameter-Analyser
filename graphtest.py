@@ -13,11 +13,8 @@ class graphApp(App):
 		plot = MeshLinePlot(color=[1, 0, 0, 1])
 		plot.points = [(x, sin(x / 10.)) for x in range(0, 101)]
 		graph.add_plot(plot)
-		root.add_widget(graph)
-				
+		root.add_widget(graph)        
 		return root
 ## Main program execution here
 if __name__ == "__main__":
 	graphApp().run()
-
-

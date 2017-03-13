@@ -18,11 +18,11 @@ class Configuration(TabbedPanel):
 	# Three tab options to select between sample sweep and qscv
 	# A list of pre defined configuration options for Vds Vg and Id measurements
 	# The ability to perform Hannah's long term time measurements (hack version)
-	# 
+	#
 	# To achieve these things we need to have the ability to setup SMU and VDU.
 	# We need the ability to program the graphical display, which also will provide
 	# input into our graphical results screen.
-	
+
 	# SMU setup passes parameters based on if the unit is a constant / variable or common connection
 	# Therefore this setting is very important, drop down box recommended.
 	# SMU #X [Cons/Var/Comm/Disabled] -> Populate rest of line based on selection
@@ -37,7 +37,7 @@ class Configuration(TabbedPanel):
 	# http://stackoverflow.com/questions/38234848/kivy-dynamically-add-and-remove-dropdown-entries
 	# For sweep mode need at least one variable before can continue.
 	def smu1_text_update(self, text):
-		self.smu1_select.text = '%s' % text 
+		self.smu1_select.text = '%s' % text
 		if text == "Disabled":
 			#self.smu1_text1.readonly = True
 			self.smu1_text1.disabled = True
@@ -85,14 +85,14 @@ class Configuration(TabbedPanel):
 	# without transitioning to the results accordion if required.
 	def addButtonPressed(self):
 		# If none of the variable buttons are selected then add them to the menu
-		#
+		pass
 	def removeButtonPressed(self):
 		# If e
 		self.dropdown.remove_widget(self)
 		self.dropdown.clear_widgets()
 
 #class ConfigurationHeader(tabbedpanel):
-	
+
 # There also would be room in here for an accordion tab that allows automation of multiple
 # test routines to allow the device to constantly measure various parameters over an
 # extended time period. This could be very powerful for device analysis without being
@@ -112,7 +112,7 @@ class Results(BoxLayout):
 		self.plot.points = [(x,sin(x/10.)) for x in range(0,101)]
 		self.graph.add_plot(plot)
 	pass
-	
+
 class hp4156cApp(App):
 	def build(self):
 		self.title = "HP4156C Parameter Analyser"
@@ -143,7 +143,7 @@ class hp4156cApp(App):
 		## Add the accordion to the main screen
 		root.add_widget(menu)
 		return root
-	
+
 
 ## Main program execution here
 if __name__ == "__main__":

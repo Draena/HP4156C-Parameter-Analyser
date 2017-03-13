@@ -1,11 +1,15 @@
 # HP4156C-Parameter-Analyser
 Python scripts and control software for the HP4156C Parameter Analyser
 
+## Branches
+`master` branch contains a _functional_ set of scripts that works as is with the parameter analyzer.
+`*-dev` branches are working branches to develop new features
+
 
 # hp4156c.py
 
 This is the class for controlling the hp4156c parameter analyser.
-It utilises pyvisa for GPIB control, and is implemented using the 
+It utilises pyvisa for GPIB control, and is implemented using the
 hp4156 ASCII SCPI command set. This allows simple control using
 text based commands that mimic the HP4156C control panel.
 refer to the Agilent 4155B/4156B GPIB Command reference, Edition 4.
@@ -30,7 +34,7 @@ Kivy code for setting up the gui
 
 Test script for controlling the hp4156c using the hp4156c.py class.
 Eventually this should be expanded to cover all test conditions,
-and enable the hp4156c.py class to operate without producing 
+and enable the hp4156c.py class to operate without producing
 device errors.
 
 # graphtest.py
