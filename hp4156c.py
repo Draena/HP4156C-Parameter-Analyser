@@ -134,7 +134,7 @@ class hp4156c(object):
 		header=""
 		for val in self.values:
 			header=header+val+","
-		np.savetxt(fname, self.data,delimiter=',',header=header)
+		np.savetxt(fname, self.data,delimiter=',',header=header[:-1])
 
 	def single(self):
 		"""Initiate a single measurement using entered parameters"""

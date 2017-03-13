@@ -3,6 +3,7 @@
 import sys
 import io
 import visa
+import os
 ###############################################
 ## Class definitions and defines
 ###############################################
@@ -11,7 +12,8 @@ from hp4156c import hp4156c
 ## Code starts here
 ###############################################
 
-def fetsweep(fname="test.csv"):
+def fetsweep(fname="test.csv",savedir=""):
+
     # Initialise the device
     device = hp4156c()
     print(device.error())
@@ -30,9 +32,9 @@ def fetsweep(fname="test.csv"):
     print(device.error())
     device.var("VAR1",["LIN","DOUB","-10","0.1","10.0","1e-3"])
     print(device.error())
-    device.var("VAR2",["LIN","DOUB","-10","0.1","10.0","1e-3"])
+    device.var("VAR2",["LIN","SING","0","1","0","1e-3"])
     print(device.error())
-    device.visualiseTwoYs(["Voltage","1","-1","1"], ["Current","1","-0.1","0.1"],["Current","1","-0.1","0.1"])
+    device.visualiseTwoYs(["Voltage","1","-10","10"], ["Current","1","-1e-8","1e-8"],["Current","1","-1e-8","1e-8"])
     print(device.error())
     device.single()
     print(device.error())
@@ -40,7 +42,7 @@ def fetsweep(fname="test.csv"):
     print(device.error())
     print(device.data)
     print(device.error())
-    device.save_data(fname=fname)
+    device.save_data(fname=os.path.join(savedir,fname))
 
 def diodesweep():
     # Initialise the device

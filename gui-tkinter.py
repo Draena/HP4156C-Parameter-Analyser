@@ -218,7 +218,7 @@ class PAGUI(Frame):
         if self.datatype.get() ==1:
             print("oh no we havent written a script for that yet!")
         elif self.datatype.get() == 2:
-            fetsweep()
+            fetsweep(fname=self.fname_final.get(),savedir=self.directory.get())
 
 
 
