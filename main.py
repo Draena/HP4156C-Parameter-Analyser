@@ -86,11 +86,12 @@ class Configuration(TabbedPanel):
 	def addButtonPressed(self):
 		# If none of the variable buttons are selected then add them to the menu
 		#
+		pass
 	def removeButtonPressed(self):
 		# If e
 		self.dropdown.remove_widget(self)
 		self.dropdown.clear_widgets()
-
+		pass
 #class ConfigurationHeader(tabbedpanel):
 	
 # There also would be room in here for an accordion tab that allows automation of multiple

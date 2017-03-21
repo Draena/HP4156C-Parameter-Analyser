@@ -1,0 +1,27 @@
+<HomeScreen>:
+    id: home_screen
+    top_layout: topLayoutID
+
+    orientation: 'vertical'
+
+    BoxLayout:
+        id: topLayoutID
+        size_hint: 1, .05
+        pos_hint: {'x': 0, 'y': .90}
+        BoxLayout:
+            Button:
+                id: btn_release
+                text: 'SMU1'
+                on_press: root.btn_releaseClicked()
+            Widget:
+                
+            Dropdown:
+                
+            Button:
+            id: btn_version
+            text: 'SMU2'
+            on_press: root.btn_versionClicked()
+        Button:
+            id: btn_device
+            text: 'SMU3'
+            on_press: root.btn_deviceClicked()
