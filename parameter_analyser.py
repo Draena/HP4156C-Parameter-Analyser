@@ -32,10 +32,22 @@ def define_transfer_smu(device):
     device.disableSmu(["SMU4"])
     device.get_error()
     print("=>SMU's assigned")
+def define_output_smu(device):
+    device.measurementMode("SWEEP","MEDIUM")
+    device.get_error()
+    device.smu("SMU1",["VS","CONS","IS","COMM"])
+    device.get_error()
+    device.smu("SMU2",["VDS","VAR1","ID","V"])
+    device.get_error()
+    device.smu("SMU3",["VG","VAR2","IG","V"])
+    device.get_error()
+    device.disableSmu(["SMU4"])
+    device.get_error()
+    print("=>SMU's assigned")
 def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_start, vds_step, vds_num):
     device.var("VAR1",["LIN","DOUB",str(vg_start),str(vg_step),str(vg_stop),"1e-3"])
     device.get_error()
-    device.var("VAR2",["LIN","SING",str(vds),str(vds_step),str(vds_num),"1e-3"])
+    device.var("VAR2",["LIN","SING",str(vds_start),str(vds_step),str(vds_num),"1e-3"])
     device.get_error()
     print("=>Sweep Parameters set")
     device.single()
@@ -44,9 +56,26 @@ def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_sta
     device.get_error()
     if "[INFO]"in fname:
         if vds_step==0:
-            fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start))
+            fname = fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start))
         else:
-            fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start) + "+" + str(vg_num) + "x" + str(vds_step))
+            fname = fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start) + "+" + str(vg_num) + "x" + str(vds_step))
+    device.save_data(fname=os.path.join(savedir,fname))
+    print("=>Data Finished Collecting")
+def measure_output(device, fname, savedir, vds_start, vds_stop, vds_step, vg_start, vg_step, vg_num):
+    device.var("VAR1",["LIN","DOUB",str(vds_start),str(vds_step),str(vds_stop),"1e-3"])
+    device.get_error()
+    device.var("VAR2",["LIN","SING",str(vg_start),str(vg_step),str(vg_num),"1e-3"])
+    device.get_error()
+    print("=>Sweep Parameters set")
+    device.single()
+    device.get_error()
+    device.daq(['VG', 'VDS', 'ID', 'IG'])
+    device.get_error()
+    if "[INFO]"in fname:
+        if vds_step==0:
+            fname = fname.replace("[INFO]", "outputVDS" + str(vds_start) + "VG" + str(vg_start))
+        else:
+            fname = fname.replace("[INFO]", "outputVDS" + str(vg_start) + "VG" + str(vg_start) + "+" + str(vg_num) + "x" + str(vg_step))
     device.save_data(fname=os.path.join(savedir,fname))
     print("=>Data Finished Collecting")
 def fet_sweep_oneoff(fname="test_[INFO].csv",savedir=""):
