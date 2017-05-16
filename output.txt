@@ -1,0 +1,19 @@
+HP4156C Initialisation
+Could not connect to device LPT1
+Found device HEWLETT-PACKARD,4156C,0,03.04:04.05:01.00
+Connected to device GPIB0::2
++0,"No error"
++0,"No error"
+=>Device Initialized
++0,"No error"
++0,"No error"
++0,"No error"
++0,"No error"
++0,"No error"
+=>SMU's assigned
++12,"Syntax error. Unknown variable name."
+-128,"Numeric data not allowed"
+-128,"Numeric data not allowed"
+=>Sweep Parameters set
+timeout on line 54 of measure_transfer during the get_error call
+presumably because of inability to accept commands during measurement

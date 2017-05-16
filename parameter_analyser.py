@@ -37,7 +37,7 @@ def define_output_smu(device):
     device.get_error()
     device.smu("SMU1",["VS","CONS","IS","COMM"])
     device.get_error()
-    device.smu("SMU2",["VDS","VAR1","ID","V"])
+    device.smu("SMU2",["VDS","VAR1","IDS","V"])
     device.get_error()
     device.smu("SMU3",["VG","VAR2","IG","V"])
     device.get_error()
@@ -82,7 +82,7 @@ def fet_sweep_oneoff(fname="test_[INFO].csv",savedir=""):
     # Initialise the device
     device = initialize_device()
     define_transfer_smu(device)
-    device.visualiseTwoYs(["VG","1","-10","10"], ["IDS","0","1e-11","1e-6"],["IG","1","-1e-8","1e-8"])
+    device.visualiseTwoYs(["VG","1","-10","10"], ["IDS","2","1e-11","1e-6"],["IG","1","-1e-8","1e-8"])
     device.get_error()
     measure_transfer(device, fname, savedir, -10, 10, 0.1, 0.1, 0, 1)
 
