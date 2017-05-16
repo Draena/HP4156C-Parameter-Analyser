@@ -211,6 +211,9 @@ class hp4156c(object):
 			self.merged.append(self.temp)
 		return self.merged
 
-	def error(self):
+	def get_error(self, v=True):
 		"""Returns the first value in the error register"""
-		return self.pa.ask(":SYST:ERR?")
+		err=self.pa.ask(":SYST:ERR?")
+		if v:
+			print(err)
+		return err

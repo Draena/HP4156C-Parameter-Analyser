@@ -11,68 +11,84 @@ from hp4156c import hp4156c
 ###############################################
 ## Code starts here
 ###############################################
-
-def fetsweep(fname="test.csv",savedir=""):
-
-    # Initialise the device
+def initialize_device():
+    """Initialise the device and resets. returns the resetted device"""
     device = hp4156c()
-    print(device.error())
+    device.get_error()
     device.reset()
-    print(device.error())
-    ## Setup the device for a Diode Measurement
+    device.get_error()
+    print("=>Device Initialized")
+    return device
+    device = initialize_device()
+def define_transfer_smu(device):
     device.measurementMode("SWEEP","MEDIUM")
-    print(device.error())
+    device.get_error()
     device.smu("SMU1",["VS","CONS","IS","COMM"])
-    print(device.error())
+    device.get_error()
     device.smu("SMU2",["VDS","VAR2","ID","V"])
-    print(device.error())
+    device.get_error()
     device.smu("SMU3",["VG","VAR1","IG","V"])
-    print(device.error())
+    device.get_error()
     device.disableSmu(["SMU4"])
-    print(device.error())
-    device.var("VAR1",["LIN","DOUB","-10","0.1","10.0","1e-3"])
-    print(device.error())
-    device.var("VAR2",["LIN","SING","0.1","0","1","1e-3"])
-    print(device.error())
-    device.visualiseTwoYs(["VG","1","-10","10"], ["IDS","1","-1e-8","1e-8"],["IG","1","-1e-8","1e-8"])
-    print(device.error())
+    device.get_error()
+    print("=>SMU's assigned")
+def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_start, vds_step, vds_num):
+    device.var("VAR1",["LIN","DOUB",str(vg_start),str(vg_step),str(vg_stop),"1e-3"])
+    device.get_error()
+    device.var("VAR2",["LIN","SING",str(vds),str(vds_step),str(vds_num),"1e-3"])
+    device.get_error()
+    print("=>Sweep Parameters set")
     device.single()
-
-    dataReturned = device.daq(['VG', 'VDS', 'ID', 'IG'])
-    print(device.error())
-    print(device.data)
-    print(device.error())
+    device.get_error()
+    device.daq(['VG', 'VDS', 'ID', 'IG'])
+    device.get_error()
+    if "[INFO]"in fname:
+        if vds_step==0:
+            fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start))
+        else:
+            fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start) + "+" + str(vg_num) + "x" + str(vds_step))
     device.save_data(fname=os.path.join(savedir,fname))
+    print("=>Data Finished Collecting")
+def fet_sweep_oneoff(fname="test_[INFO].csv",savedir=""):
+    # Initialise the device
+    device = initialize_device()
+    define_transfer_smu(device)
+    device.visualiseTwoYs(["VG","1","-10","10"], ["IDS","0","1e-11","1e-6"],["IG","1","-1e-8","1e-8"])
+    device.get_error()
+    measure_transfer(device, fname, savedir, -10, 10, 0.1, 0.1, 0, 1)
+
+
+
 
 def diodesweep():
     # Initialise the device
     device = hp4156c()
-    print(device.error())
+    device.get_error()
     device.reset()
-    print(device.error())
+    device.get_error()
     ## Setup the device for a Diode Measurement
     device.measurementMode("SWEEP","SHORT")
-    print(device.error())
+    device.get_error()
     device.smu("SMU1",["VF","VAR1","IF","V"])
-    print(device.error())
+    device.get_error()
     device.smu("SMU3",["V","CONS","I","COMM"])
-    print(device.error())
+    device.get_error()
     device.disableSmu(["SMU2","SMU4"])
-    print(device.error())
+    device.get_error()
     device.var("VAR1",["LIN","DOUB","-1","0.1","1.0","100e-3"])
-    print(device.error())
+    device.get_error()
     device.visualise(["Voltage","1","-1","1"], ["Current","1","-0.1","0.1"])
-    print(device.error())
+    device.get_error()
     device.single()
-    print(device.error())
+    device.get_error()
     dataReturned = device.daq(["VF","IF"])
-    print(device.error())
+    device.get_error()
     print(device.data)
-    print(device.error())
+    device.get_error()
     #for saving
     #device.save_data(fname='test.csv')
 
 
 
 if __name__ == "__main__":
-    diodesweep()
+    fet_sweep_oneoff()
