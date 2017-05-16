@@ -10,10 +10,10 @@ Connected to device GPIB0::2
 +0,"No error"
 +0,"No error"
 +0,"No error"
-=>SMU's assigned
-+12,"Syntax error. Unknown variable name."
--128,"Numeric data not allowed"
--128,"Numeric data not allowed"
+=>SMU's assigned # end of define_transfer_smu
++12,"Syntax error. Unknown variable name." # aftervisualiseTwoYs
+-128,"Numeric data not allowed" # after device.var1
+-128,"Numeric data not allowed" # after device.var1
 =>Sweep Parameters set
 timeout on line 54 of measure_transfer during the get_error call
 presumably because of inability to accept commands during measurement
