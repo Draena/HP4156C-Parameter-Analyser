@@ -89,22 +89,20 @@ class hp4156c(object):
 	## arg2 is the parameters for a sweep. [LIN:LOG SING:DOUB STAR STEP STOP COMP]
 	def var(self, arg1, arg2):
 		"""Variable parameters, allowing step changes to be implemented"""
-		self.arg2 = self._varStringMod(arg2)
-		self.string = ":PAGE:MEAS:" + arg1 + ":"
+		string = ":PAGE:MEAS:" + arg1 + ":"
 		if arg1 == "VAR1":
-			self.pa.write(self.string + "SPAC %s" % self.arg2[0])
-			self.pa.write(self.string + "MODE %s" % self.arg2[1])
-			self.pa.write(self.string + "STAR %s" % self.arg2[2])
-			self.pa.write(self.string + "STEP %s" % self.arg2[3])
-			self.pa.write(self.string + "STOP %s" % self.arg2[4])
-			self.pa.write(self.string + "COMP %s" % self.arg2[5])
+			self.pa.write(string + "SPAC %s" % arg2[0])
+			self.pa.write(string + "MODE %s" % arg2[1])
+			self.pa.write(string + "STAR %s" % arg2[2])
+			self.pa.write(string + "STEP %s" % arg2[3])
+			self.pa.write(string + "STOP %s" % arg2[4])
+			self.pa.write(string + "COMP %s" % arg2[5])
 		elif arg1 == "VAR2":
-			self.pa.write(self.string + "SPAC %s" % self.arg2[0])
-			self.pa.write(self.string + "MODE %s" % self.arg2[1])
-			self.pa.write(self.string + "STAR %s" % self.arg2[2])
-			self.pa.write(self.string + "POIN %s" % self.arg2[4])
-			self.pa.write(self.string + "STEP %s" % self.arg2[3])
-			self.pa.write(self.string + "COMP %s" % self.arg2[5])
+			self.pa.write(string + "MODE %s" % arg2[1])
+			self.pa.write(string + "STAR %s" % arg2[2])
+			self.pa.write(string + "POIN %s" % arg2[4])
+			self.pa.write(string + "STEP %s" % arg2[3])
+			self.pa.write(string + "COMP %s" % arg2[5])
 
 	def _daqStringMod(self,arg):
 		"""Format conversion for obtained data"""

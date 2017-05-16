@@ -19,7 +19,7 @@ def initialize_device():
     device.get_error()
     print("=>Device Initialized")
     return device
-    device = initialize_device()
+
 def define_transfer_smu(device):
     device.measurementMode("SWEEP","MEDIUM")
     device.get_error()
@@ -47,6 +47,7 @@ def define_output_smu(device):
 def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_start, vds_step, vds_num):
     device.var("VAR1",["LIN","DOUB",str(vg_start),str(vg_step),str(vg_stop),"1e-3"])
     device.get_error()
+    #note, VAR2 is always linear
     device.var("VAR2",["LIN","SING",str(vds_start),str(vds_step),str(vds_num),"1e-3"])
     device.get_error()
     print("=>Sweep Parameters set")
@@ -82,7 +83,7 @@ def fet_sweep_oneoff(fname="test_[INFO].csv",savedir=""):
     # Initialise the device
     device = initialize_device()
     define_transfer_smu(device)
-    device.visualiseTwoYs(["VG","1","-10","10"], ["IDS","2","1e-11","1e-6"],["IG","1","-1e-8","1e-8"])
+    device.visualiseTwoYs(["VG","LIN","-10","10"], ["ID","LOG","1e-11","1e-6"], ["IG","LIN","-1e-8","1e-8"])
     device.get_error()
     measure_transfer(device, fname, savedir, -10, 10, 0.1, 0.1, 0, 1)
 
