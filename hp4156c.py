@@ -28,7 +28,6 @@ class hp4156c(object):
 		for _x in range(0,len(_devices)):
 			try:
 				self.pa = visa.instrument(_devices[_x])
-				del self.pa.timeout
 				self.device_id = self.pa.ask("*IDN?")
 				if(self.device_id == self.deviceName):
 					print("Found device %s"%self.device_id)
@@ -117,8 +116,8 @@ class hp4156c(object):
 		the case when the stored data length exceeds the maximum data length of
 		a retrieve command"""
 		#self.data = self._daqStringMod(arg)
-		self.values=values
-		self.data = [[],[]]
+		self.values=values #necessary for saving data
+		self.data =[[]]*len(values)
 		for x in range(0,len(values)):
 			try:
 				print("Obtaining %s data values" % values[x])
@@ -128,6 +127,7 @@ class hp4156c(object):
 			self.data[x] = self.pa.read_values()
 			print("Obtained %d data values for %s" % (len(self.data[x]),values[x]))
 		self.data=np.transpose(np.array(self.data))
+		print ("data in an {} array".format(self.data.shape))
 
 	def save_data(self,fname="test.csv"):
 		header=""
@@ -139,7 +139,9 @@ class hp4156c(object):
 		"""Initiate a single measurement using entered parameters"""
 		self.pa.write(":PAGE:SCON:SING")
 		self.pa.write("*WAI")
+		self.pa.timeout=1e6 #if you need more than 11.6 days you're fucked
 		self.pa.ask("*OPC?")
+		self.pa.timeout=10
 
 
 	def continuous(self):

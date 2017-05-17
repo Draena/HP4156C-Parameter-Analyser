@@ -57,9 +57,9 @@ def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_sta
     device.get_error()
     if "[INFO]"in fname:
         if vds_step==0:
-            fname = fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start))
+            fname = fname.replace("[INFO]", "transferVG" + str(abs(vg_start)) + "VDS" + str(abs(vds_start)))
         else:
-            fname = fname.replace("[INFO]", "transferVG" + str(vg_start) + "VDS" + str(vds_start) + "+" + str(vg_num) + "x" + str(vds_step))
+            fname = fname.replace("[INFO]", "transferVG" + str(abs(vg_start)) + "VDS" + str(abs(vds_start)) + "+" + str(vg_num) + "x" + str(abs(vds_step)))
     device.save_data(fname=os.path.join(savedir,fname))
     print("=>Data Finished Collecting")
 def measure_output(device, fname, savedir, vds_start, vds_stop, vds_step, vg_start, vg_step, vg_num):
@@ -74,18 +74,18 @@ def measure_output(device, fname, savedir, vds_start, vds_stop, vds_step, vg_sta
     device.get_error()
     if "[INFO]"in fname:
         if vds_step==0:
-            fname = fname.replace("[INFO]", "outputVDS" + str(vds_start) + "VG" + str(vg_start))
+            fname = fname.replace("[INFO]", "outputVDS" + str(abs(vds_start)) + "VG" + str(abs(vg_start)))
         else:
-            fname = fname.replace("[INFO]", "outputVDS" + str(vg_start) + "VG" + str(vg_start) + "+" + str(vg_num) + "x" + str(vg_step))
+            fname = fname.replace("[INFO]", "outputVDS" + str(abs(vds_start)) + "VG" + str(abs(vg_start)) + "+" + str(vg_num) + "x" + str(abs(vg_step)))
     device.save_data(fname=os.path.join(savedir,fname))
     print("=>Data Finished Collecting")
-def fet_sweep_oneoff(fname="test_[INFO].csv",savedir=""):
+def test_fet(fname="test_[INFO].csv",savedir=""):
     # Initialise the device
     device = initialize_device()
     define_transfer_smu(device)
     device.visualiseTwoYs(["VG","LIN","-10","10"], ["ID","LOG","1e-11","1e-6"], ["IG","LIN","-1e-8","1e-8"])
     device.get_error()
-    measure_transfer(device, fname, savedir, -10, 10, 0.1, 0.1, 0, 1)
+    measure_transfer(device, fname, savedir, -1, 1, 0.1, 0.1, 0, 1)
 
 
 
@@ -121,4 +121,4 @@ def diodesweep():
 
 
 if __name__ == "__main__":
-    fet_sweep_oneoff()
+    test_fet()
