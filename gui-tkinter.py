@@ -10,7 +10,7 @@ import tkFileDialog
 import time
 
 from download_data import download_data
-from parameter_analyser import fetsweep
+from cntrun import run_FET_series
 
 
 
@@ -218,7 +218,7 @@ class PAGUI(Frame):
         if self.datatype.get() ==1:
             print("oh no we havent written a script for that yet!")
         elif self.datatype.get() == 2:
-            fetsweep(fname=self.fname_final.get(),savedir=self.directory.get())
+            run_FET_series(self.fname_final.get(),self.directory.get())
 
 
 

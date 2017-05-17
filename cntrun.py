@@ -4,7 +4,7 @@
 
 import parameter_analyser as pa
 import sys
-def run_transfer_series(fname, savedir):
+def run_FET_series(fname, savedir):
     device = pa.initialize_device()
     pa.define_transfer_smu()
     pa.measure_transfer(device, fname, savedir, -10, 10, 0.1, 0.1, 0, 1)
