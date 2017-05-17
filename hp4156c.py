@@ -28,6 +28,7 @@ class hp4156c(object):
 		for _x in range(0,len(_devices)):
 			try:
 				self.pa = visa.instrument(_devices[_x])
+				del self.pa.timeout
 				self.device_id = self.pa.ask("*IDN?")
 				if(self.device_id == self.deviceName):
 					print("Found device %s"%self.device_id)
@@ -138,6 +139,7 @@ class hp4156c(object):
 		"""Initiate a single measurement using entered parameters"""
 		self.pa.write(":PAGE:SCON:SING")
 		self.pa.write("*WAI")
+		self.pa.ask("*OPC?")
 
 
 	def continuous(self):
