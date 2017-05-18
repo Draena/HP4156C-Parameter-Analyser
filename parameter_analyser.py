@@ -37,7 +37,7 @@ def define_output_smu(device):
     device.get_error()
     device.smu("SMU1",["VS","CONS","IS","COMM"])
     device.get_error()
-    device.smu("SMU2",["VDS","VAR1","IDS","V"])
+    device.smu("SMU2",["VDS","VAR1","ID","V"])
     device.get_error()
     device.smu("SMU3",["VG","VAR2","IG","V"])
     device.get_error()
@@ -49,6 +49,7 @@ def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_sta
     device.get_error()
     #note, VAR2 is always linear
     device.var("VAR2",["LIN","SING",str(vds_start),str(vds_step),str(vds_num),"1e-3"])
+    device.visualiseTwoYs(["VG","LIN",str(vg_start),str(vg_stop)], ["ID","LOG","1e-11","1e-6"], ["IG","LIN","-1e-8","1e-8"])
     device.get_error()
     print("=>Sweep Parameters set")
     device.single()
