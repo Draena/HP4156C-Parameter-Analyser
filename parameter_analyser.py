@@ -49,6 +49,7 @@ def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_sta
     device.get_error()
     #note, VAR2 is always linear
     device.var("VAR2",["LIN","SING",str(vds_start),str(vds_step),str(vds_num),"1e-3"])
+    device.get_error()
     device.visualiseTwoYs(["VG","LIN",str(vg_start),str(vg_stop)], ["ID","LOG","1e-11","1e-6"], ["IG","LIN","-1e-8","1e-8"])
     device.get_error()
     print("=>Sweep Parameters set")
@@ -60,13 +61,15 @@ def measure_transfer(device, fname, savedir, vg_start, vg_stop, vg_step, vds_sta
         if vds_step==0:
             fname = fname.replace("[INFO]", "transferVG" + str(abs(vg_start)) + "VDS" + str(abs(vds_start)))
         else:
-            fname = fname.replace("[INFO]", "transferVG" + str(abs(vg_start)) + "VDS" + str(abs(vds_start)) + "+" + str(vg_num) + "x" + str(abs(vds_step)))
+            fname = fname.replace("[INFO]", "transferVG" + str(abs(vg_start)) + "VDS" + str(abs(vds_start)) + "+" + str(vds_num) + "x" + str(abs(vds_step)))
     device.save_data(fname=os.path.join(savedir,fname))
     print("=>Data Finished Collecting")
 def measure_output(device, fname, savedir, vds_start, vds_stop, vds_step, vg_start, vg_step, vg_num):
     device.var("VAR1",["LIN","DOUB",str(vds_start),str(vds_step),str(vds_stop),"1e-3"])
     device.get_error()
     device.var("VAR2",["LIN","SING",str(vg_start),str(vg_step),str(vg_num),"1e-3"])
+    device.get_error()
+    device.visualiseTwoYs(["VDS","LIN",str(vg_start),str(vg_stop)], ["ID","LOG","1e-11","1e-6"], ["IG","LIN","-1e-8","1e-8"])
     device.get_error()
     print("=>Sweep Parameters set")
     device.single()

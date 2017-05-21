@@ -97,7 +97,7 @@ class PAGUI(Frame):
 
         self.directory_entry = Entry(self, textvariable=self.directory)
 
-        self.fname.set('Chip[chip]_device[device]_run[run]_somenotes_[time].csv')
+        self.fname.set('Chip[chip]_device[device]_run[run]_somenotes_[INFO]_[time].csv')
         self.fname_final.set(make_fname_final(self.fname.get(),
                             self.chip.get(),self.device.get(),self.run.get()))
 
