@@ -12,6 +12,7 @@ def run_FET_series(fname, savedir):
     pa.measure_transfer(device, fname, savedir, -10, 10, 0.1, 0.01, 0, 1)
     pa.measure_transfer(device, fname, savedir, -20, 20, 0.1, 0.01, 0, 1)
     pa.measure_transfer(device, fname, savedir, -10, 10, 0.1, 0.1, 0.1, 5)
+    pa.define_output_smu(device)
     pa.measure_output(device, fname, savedir, -5, 5, 0.1, -20, 5, 9)
 
 if __name__ == "__main__":
