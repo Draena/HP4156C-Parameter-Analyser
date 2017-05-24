@@ -9,7 +9,7 @@
 # This allows the HP4156C to wrap the visa class
 # When wrapped the HP4156C class takes care of all the visa syntax
 # and translates parameter analyser settings into visa commands
-import sys,io,visa
+import sys,visa,os
 import numpy as np
 
 
@@ -129,11 +129,11 @@ class hp4156c(object):
 		self.data=np.transpose(np.array(self.data))
 		print ("data in an {} array".format(self.data.shape))
 
-	def save_data(self,fname="test.csv"):
+	def save_data(self,fname,savedir):
 		header=""
 		for val in self.values:
 			header=header+val+","
-		np.savetxt(fname, self.data, delimiter=',', header=header[:-1], comments="")
+		np.savetxt(os.path.join(savedir,fname), self.data, delimiter=',', header=header[:-1], comments="")
 
 	def single(self):
 		"""Initiate a single measurement using entered parameters"""
