@@ -69,7 +69,7 @@ def measure_output(device, fname, savedir, vds_start, vds_stop, vds_step, vg_sta
     device.get_error()
     device.var("VAR2",["LIN","SING",str(vg_start),str(vg_step),str(vg_num),"1e-3"])
     device.get_error()
-    device.visualiseTwoYs(["VDS","LIN",str(vg_start),str(vg_stop)], ["ID","LOG","1e-11","1e-6"], ["IG","LIN","-1e-8","1e-8"])
+    device.visualiseTwoYs(["VDS","LIN",str(vds_start),str(vds_stop)], ["ID","LIN","-1e-6","1e-6"], ["IG","LIN","-1e-8","1e-8"])
     device.get_error()
     print("=>Sweep Parameters set")
     device.single()
